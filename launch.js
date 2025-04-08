@@ -15,7 +15,7 @@
       container: $('main'),
       overlay: $('overlay'),
       gameover: $('step-5'),
-      quality: quality,
+      quality: "LOW",
       difficulty: 0,
       hud: hud === 1,
       controlType: controlType,
@@ -44,9 +44,9 @@
 
   u = bkcore.Utils.getURLParameter;
 
-  defaultControls = bkcore.Utils.isTouchDevice() ? 1 : 0;
+  defaultControls = !bkcore.Utils.isTouchDevice() ? 1 : 0;
 
-  s = [['controlType', ['KEYBOARD', 'TOUCH', 'LEAP MOTION CONTROLLER', 'GAMEPAD'], defaultControls, defaultControls, 'Controls: '], ['quality', ['LOW', 'MID', 'HIGH', 'VERY HIGH'], 3, 3, 'Quality: '], ['hud', ['OFF', 'ON'], 1, 1, 'HUD: '], ['godmode', ['OFF', 'ON'], 0, 1, 'Godmode: ']];
+  s = [['controlType', ['KEYBOARD', 'TOUCH', 'LEAP MOTION CONTROLLER', 'GAMEPAD'], defaultControls, defaultControls, 'Controls: '], ['quality', ['LOW', 'MID', 'HIGH', 'VERY HIGH'], 0, 0, 'Quality: '], ['hud', ['OFF', 'ON'], 1, 1, 'HUD: '], ['godmode', ['OFF', 'ON'], 0, 1, 'Godmode: ']];
 
   _fn = function(a) {
     var e, f, _ref;
@@ -106,11 +106,19 @@
       return window.location.href = 'http://get.webgl.org/';
     };
   } else {
-    $('start').onclick = function() {
+    function startGame(e) {
+      if (e.key !== "Enter") return;
+      document.removeEventListener('keydown', startGame);
       $('step-1').style.display = 'none';
-      $('step-2').style.display = 'block';
-      return $('step-2').style.backgroundImage = "url(css/help-" + s[0][3] + ".png)";
-    };
+      $('step-2').style.display = 'none';
+      $('step-3').style.display = 'block';
+      init(s[0][3], s[1][3], s[2][3], s[3][3]);
+    }
+    document.addEventListener('keydown', startGame);
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowDown') return;
+      window.location.reload();
+    });
   }
 
 }).call(this);

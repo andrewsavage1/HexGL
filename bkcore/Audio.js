@@ -4,22 +4,14 @@ bkcore.Audio = {};
 bkcore.Audio.sounds = {};
 
 bkcore.Audio.init = function(){
-	if(window.AudioContext||window.webkitAudioContext){
-		bkcore.Audio._ctx = new (window.AudioContext||window.webkitAudioContext)();
-		bkcore.Audio._panner = bkcore.Audio._ctx.createPanner();
-		bkcore.Audio._panner.connect(bkcore.Audio._ctx.destination);
-	}
-	else {
-		bkcore.Audio._ctx = null;
-	}
-
-	bkcore.Audio.posMultipler = 1.5;
+	bkcore.Audio._ctx = null;
 };
 
 bkcore.Audio.init();
 
 bkcore.Audio.addSound = function(src, id, loop, callback, usePanner){
 	var ctx = bkcore.Audio._ctx;
+	if (!ctx) return;
 	var audio = new Audio();
 	
 	if(ctx){
@@ -73,6 +65,7 @@ bkcore.Audio.addSound = function(src, id, loop, callback, usePanner){
 
 bkcore.Audio.play = function(id){
 	var ctx = bkcore.Audio._ctx;
+	if (!ctx) return;
 
 	if(ctx){
 		var sound = ctx.createBufferSource();
@@ -98,6 +91,7 @@ bkcore.Audio.play = function(id){
 
 bkcore.Audio.stop = function(id){
 	var ctx = bkcore.Audio._ctx;
+	if (!ctx) return;
 
 	if(ctx){
 		if(bkcore.Audio.sounds[id].bufferNode !== null){
@@ -113,6 +107,7 @@ bkcore.Audio.stop = function(id){
 
 bkcore.Audio.volume = function(id, volume){
 	var ctx = bkcore.Audio._ctx;
+	if (!ctx) return;
 
 	if(ctx){
 		bkcore.Audio.sounds[id].gainNode.gain.value = volume;

@@ -84,33 +84,7 @@ bkcore.hexgl.tracks.Cityscape = {
 					'hud.speed'							: "textures/hud/hud-fg-speed.png",
 					'hud.shield'						: "textures/hud/hud-fg-shield.png"
 				},
-				sounds: {
-					bg: {
-						src: 'audio/bg.ogg',
-						loop: true,
-						usePanner: false
-					},
-					crash: {
-						src: 'audio/crash.ogg',
-						loop: false,
-						usePanner: true
-					},
-					destroyed: {
-						src: 'audio/destroyed.ogg',
-						loop: false,
-						usePanner: false
-					},
-					boost: {
-						src: 'audio/boost.ogg',
-						loop: false,
-						usePanner: true
-					},
-					wind: {
-						src: 'audio/wind.ogg',
-						loop: true,
-						usePanner: true
-					}
-				}
+				sounds: {}
 			});
 		}
 		// desktop + quality mid or high
@@ -168,28 +142,7 @@ bkcore.hexgl.tracks.Cityscape = {
 					'hud.speed'							: "textures.full/hud/hud-fg-speed.png",
 					'hud.shield'						: "textures.full/hud/hud-fg-shield.png"
 				},
-				sounds: {
-					bg: {
-						src: 'audio/bg.ogg',
-						loop: true
-					},
-					crash: {
-						src: 'audio/crash.ogg',
-						loop: false
-					},
-					destroyed: {
-						src: 'audio/destroyed.ogg',
-						loop: false
-					},
-					boost: {
-						src: 'audio/boost.ogg',
-						loop: false
-					},
-					wind: {
-						src: 'audio/wind.ogg',
-						loop: true
-					}
-				}
+				sounds: {}
 			});
 		}
 	},
